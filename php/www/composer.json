@@ -1,0 +1,30 @@
+{
+    "name": "root/html",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "claudio"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://php.fury.io/1P1dCj-ECMHxxLJ6JPfY4unV3Zh8dmklU/cn-consult/"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cn-consult/rediska"
+        }
+    ],
+    "require": {
+        "cn-consult/epf": "^2.3",
+        "geometria-lab/rediska": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit":  "^8"
+    }
+}

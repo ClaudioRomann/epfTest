@@ -1,0 +1,3 @@
+Header|Author=Steve Ballmer;Timestamp=853192238;AutoApprove=35 years;
+Change|Core-coreutil.c:2
+Disable internet driver downloads for now: The internet will not be relevant that soon

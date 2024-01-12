@@ -1,0 +1,5 @@
+Header|Author=Bill Gates;Timestamp=1705335331;Signed=Yes;AutoApprove=12 hours;
+Change|Core,Drivers-core.cpp:10,coreutil.c:17,core.h:1,coreutil.h:2
+Change|CoreUI-button.cpp:20,button.h:2
+Added new button search drivers on microsoft servers.
+This will bring us into the Internet age!
