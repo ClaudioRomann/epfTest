@@ -5,11 +5,8 @@ namespace app\data\extractors;
 class DataExtractorManager
 {
 
-    private $dataExtractorClasses = [];
-    private $data;
-
-    private $inputText;
-
+    private array $dataExtractorClasses = [];
+    private array $data;
 
     public function loadDataExtractors(AbstractDataExtractor $dataExtractor): self
     {

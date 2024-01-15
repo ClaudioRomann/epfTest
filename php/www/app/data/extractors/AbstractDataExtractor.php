@@ -6,8 +6,8 @@ use epf\epfString;
 
 abstract class AbstractDataExtractor
 {
-    protected $inputTxt;
-    protected $data;
+    protected string $inputTxt;
+    protected array $data;
 
     /**
      * @param $inputTxt string plain text

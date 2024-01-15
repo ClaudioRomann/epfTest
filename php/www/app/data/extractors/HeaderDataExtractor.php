@@ -2,7 +2,6 @@
 
 namespace app\data\extractors;
 
-use DateTimeZone;
 use epf\epfDateTime;
 use epf\epfString;
 
@@ -14,7 +13,7 @@ class HeaderDataExtractor extends AbstractDataExtractor
         self::HEADER_TYPE => 'header'
     ];
 
-    private $extractorName = 'header';
+    private string $extractorName = 'header';
 
     protected function createAttributesComponents(): void
     {
@@ -45,16 +44,15 @@ class HeaderDataExtractor extends AbstractDataExtractor
             $value = $value->__toString();
 
             if ($key === 'timestamp') {
-                $timeStamp = $value;
+                //$timeStamp = $value;
 
-;                $epfDateTime = new epfDateTime($value);
+                $epfDateTime = new epfDateTime($value);
                 $epfDateTime->format('Y-m-d H:i:s');
 
                 $array[$key] = $epfDateTime->format('Y-m-d H:i:s');
 
                 continue;
             }
-
 
             // ⚠️⚠️
             // ask about the logic of autoapprove
@@ -70,7 +68,6 @@ class HeaderDataExtractor extends AbstractDataExtractor
             }
 
             $array[$key] = $value;
-
 
         }
 
@@ -88,7 +85,7 @@ class HeaderDataExtractor extends AbstractDataExtractor
     }
 
     /**
-     * return ['header' => ['Author=Bill Gates, Timestamp=853082238, Signed=Yes, AutoApprove=12 hours]]
+     * return ['Author=Bill Gates, Timestamp=853082238, Signed=Yes, AutoApprove=12 hours]
      */
     public function extractData(): array
     {

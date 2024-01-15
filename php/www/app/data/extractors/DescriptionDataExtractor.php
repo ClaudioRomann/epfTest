@@ -15,7 +15,7 @@ class DescriptionDataExtractor extends AbstractDataExtractor
         self::CHANGE_TYPE => 'changes'
     ];
 
-    private $extractorName = 'description';
+    private string $extractorName = 'description';
 
     public function init(): void
     {
