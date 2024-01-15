@@ -32,7 +32,7 @@ class ConverterTest extends TestCase
     private function textToTest(): array
     {
         return [
-            'Header|Author=Bill Gates;Timestamp=853082238;Signed=Yes;AutoApprove=12 hours;
+            'Header|Author=Bill Gates;Timestamp=1705335331;Signed=Yes;AutoApprove=12 hours;
 Change|Core,Drivers-core.cpp:10,coreutil.c:17,core.h:1,coreutil.h:2
 Change|CoreUI-button.cpp:20,button.h:2
 Added new button search drivers on microsoft servers.
@@ -47,7 +47,7 @@ Disable internet driver downloads for now: The internet will not be relevant tha
     {
         return [
             '<?xml version="1.0" encoding="UTF-8"?>
-<release-info timestamp="1997-01-12 15:17:18">
+<release-info timestamp="2024-01-15 16:15:31">
 <meta author="Bill Gates" signed="yes" approved="yes"/>
 <change>
 <components>

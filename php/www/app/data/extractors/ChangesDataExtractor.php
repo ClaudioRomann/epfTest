@@ -10,7 +10,7 @@ class ChangesDataExtractor extends AbstractDataExtractor
 
     protected const NODE_TYPES = [self::CHANGE_TYPE => 'changes'];
 
-    private string $extractorName = 'changes';
+    private $extractorName = 'changes';
 
     protected function createAttributesComponents(): void
     {

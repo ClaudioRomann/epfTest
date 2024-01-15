@@ -6,7 +6,7 @@ use epf\epfXmlWriter;
 
 class XmlConverterBuilder implements XmlConverterInterface
 {
-    private epfXmlWriter $xml;
+    private $xml;
 
     public function __construct(string $xmlName)
     {

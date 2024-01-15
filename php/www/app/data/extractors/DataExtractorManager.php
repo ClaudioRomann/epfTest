@@ -5,10 +5,10 @@ namespace app\data\extractors;
 class DataExtractorManager
 {
 
-    private array $dataExtractorClasses = [];
-    private array $data;
+    private $dataExtractorClasses = [];
+    private $data;
 
-    public function loadDataExtractors(AbstractDataExtractor $dataExtractor): self
+    public function loadDataExtractors(AbstractDataExtractor $dataExtractor): DataExtractorManager
     {
         $this->dataExtractorClasses [] = $dataExtractor;
         return $this;
