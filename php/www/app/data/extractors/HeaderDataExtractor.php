@@ -80,7 +80,7 @@ class HeaderDataExtractor extends AbstractDataExtractor
     }
 
     /**
-     * return ['Author=Bill Gates, Timestamp=853082238, Signed=Yes, AutoApprove=12 hours]
+     * return ['Author=Bill Gates, Timestamp=853082238, signed=Yes, AutoApprove=12 hours]
      */
     public function extractData(): array
     {
