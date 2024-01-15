@@ -14,7 +14,7 @@ class HeaderDataExtractor extends AbstractDataExtractor
     ];
 
     private $extractorName = 'header';
-    private $autoApprove = '6 years';
+    private $autoApprove   = '6 years';
 
     protected function createAttributesComponents(): void
     {
@@ -57,13 +57,13 @@ class HeaderDataExtractor extends AbstractDataExtractor
             if ($key === 'autoapprove') {
 
                 $timestamp = new epfDateTime($array['timestamp']);
+
                 $array['approved'] = $timestamp->isOlderThan($this->autoApprove) ? 'no' : 'yes';
 
                 continue;
             }
 
             $array[$key] = $value;
-
         }
 
         if (!isset($array['signed']))
