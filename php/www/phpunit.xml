@@ -1,0 +1,12 @@
+<!-- phpunit.xml -->
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose= "true"
+         testdox="true">
+    <testsuites>
+        <testsuite name="Tests">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
+
