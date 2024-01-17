@@ -1,5 +1,5 @@
 # "xdebug-2.9.0" for PHP<=7.4 — "xdebug" (3) for PHP>=8
-ARG XDEBUG_VERSION="xdebug-2.9.0"
+ARG XDEBUG_VERSION="xdebug-2.6.0"
 FROM php:7.2-apache
 
 # Install composer
@@ -31,12 +31,11 @@ RUN pecl install xdebug-2.9.8 \
  && docker-php-ext-enable xdebug
 
 # Configure Xdebug
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo "xdebug.mode=develop,debug, " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo "xdebug.remote_connect_back=0" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#    && echo "xdebug.remote_host=docker.for.mac.host.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo "xdebug.remote_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
- && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+
+RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+# && echo "xdebug.mode=develop,debug, " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+#&& echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+ && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
  && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
  && echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini

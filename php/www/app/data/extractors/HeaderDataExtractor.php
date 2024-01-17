@@ -17,9 +17,10 @@ class HeaderDataExtractor extends AbstractDataExtractor
     {
         $extractorName = $this->extractorName();
 
-        $objectParserWriter = new epfStringParser($this->data->$extractorName->attributes);
+        $objectParserWriter = new epfStringParser($this->data->$extractorName->attributes[0]);
 
         $attributes = $objectParserWriter->toArray();
+
         $attributesArray = $this->applyBusinessRuleToAttributes($attributes);
 
         $this->data->$extractorName->attributes = (object) $attributesArray;

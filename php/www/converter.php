@@ -7,6 +7,7 @@ $outputFilePath  = 'files/output/' . $argv[2];
 $performanceFile = 'files/performance/performance.html';
 $inputContent    = file_get_contents($inputFilePath);
 
+
 if (!file_exists($inputFilePath)) {
     echo "Error: Input file does not exist.\n";
     exit(1);

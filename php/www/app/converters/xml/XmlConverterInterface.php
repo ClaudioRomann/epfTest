@@ -2,11 +2,13 @@
 
 namespace app\converters\xml;
 
+use stdClass;
+
 interface XmlConverterInterface
 {
-    public function createHeader(array $header): XmlConverterInterface;
+    public function createHeader(stdClass $header): XmlConverterInterface;
 
-    public function createChangers(array $changes): XmlConverterInterface;
+    public function createChangers(stdClass $changes): XmlConverterInterface;
 
-    public function createDescriptions(array $descriptions): XmlConverterInterface;
+    public function createDescriptions(stdClass $descriptions): XmlConverterInterface;
 }

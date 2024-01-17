@@ -2,100 +2,135 @@
 
 namespace app\converters\xml;
 
+use epf\epfXmlFragment;
 use epf\epfXmlWriter;
+use stdClass;
 
 class XmlConverterBuilder implements XmlConverterInterface
 {
-    private $xml;
+    private $finalXml;
+    private $xmlName;
 
     public function __construct(string $xmlName)
     {
-        $this->xml = new epfXmlWriter($xmlName);
+        $this->xmlName = $xmlName;
     }
 
 
-    public function createHeader(array $header): XmlConverterInterface
+    public function createHeader(stdClass $header): XmlConverterInterface
     {
-        if (isset($header['timestamp'])) {
-            $this->xml->addAttribute('timestamp', $header['timestamp']);
-            unset($header['timestamp']);
+        $objectHeader = $header->header;
+        $this->finalXml = new epfXmlWriter($this->xmlName);
+
+        if ($objectHeader->attributes->timestamp) {
+            $this->finalXml->addAttribute('timestamp', $objectHeader->attributes->timestamp);
+            unset($objectHeader->attributes->timestamp);
         }
 
-        $this->xml->openTag('meta');
 
-        foreach($header as $key=>$value){
-            $this->xml->addAttribute($key, $value);
-        }
+        $xml = $this->createTagWithAttribute('meta', $objectHeader->attributes);
 
-        $this->xml->closeTag();
-
+        $this->finalXml->addXml($xml);
 
         return $this;
     }
 
-    public function createChangers(array $changes): XmlConverterInterface
+    public function createChangers(stdClass $changes): XmlConverterInterface
     {
-        foreach ($changes as $change) {
-            $this->xml->openTag('change');
-                $this->xml->openTag('components');
-                    foreach ($change['components'] as $component) {
-                        $this->xml->addSimpleContentTag('component', $component);
-                    }
+        $objectChanges = $changes->changes;
 
-                $this->xml->closeTag();
+        foreach ($objectChanges as $change) {
+            $xmlChange = new epfXmlWriter('change');
 
-                $this->xml->openTag('files');
+            $xmlComponents = $this->createComponents($change->components);
+            $xmlFiles = $this->createFiles($change->files);
 
+            $xmlChange->addXml($xmlComponents);
+            $xmlChange->addXml($xmlFiles);
+            $xmlChange->closeTag();
 
-                    if (isset($change['files']['headers'])) {
-                            $this->xml->openTag('headers');
-                            foreach ($change['files']['headers'] as $header) {
-                                foreach ($header as $key => $value){
-                                    $this->xml->openTag('file');
-                                        $this->xml->addAttribute('name', $key);
-                                        $this->xml->addAttribute('changedLines', $value);
-                                    $this->xml->closeTag();
-                                }
-                            }
-
-                        $this->xml->closeTag();
-                    }
-
-                    if (isset($change['files']['implementations'])) {
-                        $this->xml->openTag('implementations');
-                        foreach ($change['files']['implementations'] as $implementation) {
-                            foreach ($implementation as $key => $value){
-                                $this->xml->openTag('file');
-                                $this->xml->addAttribute('name', $key);
-                                $this->xml->addAttribute('changedLines', $value);
-                                $this->xml->closeTag();
-                            }
-                        }
-
-                        $this->xml->closeTag();
-                    }
-
-
-                $this->xml->closeTag();
-                $this->xml->closeTag();
+            $this->finalXml->addXml($xmlChange);
         }
 
         return $this;
     }
 
-    public function createDescriptions(array $descriptions): XmlConverterInterface
+    public function createDescriptions(stdClass $descriptions): XmlConverterInterface
     {
-        $this->xml->openTag('description');
-        $this->xml->addContent($descriptions[0]);
-        $this->xml->closeTag();
-        return $this;
+        $objectDescription = $descriptions->description;
+        $this->finalXml->openTag('description');
+        $this->finalXml->addContent($objectDescription);
+        $this->finalXml->closeTag();
 
+        return $this;
     }
 
     public function xmlDocument(): string
     {
         // close first tag
-        $this->xml->closeTag();
-        return $this->xml->__toString();
+        $this->finalXml->closeTag();
+        return $this->finalXml->__toString();
     }
+
+    private function createTagWithAttribute(string $tagName, stdClass $attributes): epfXmlWriter
+    {
+        $xml = new epfXmlWriter($tagName);
+
+        foreach ($attributes as $attributeName => $value) {
+            $xml->addAttribute($attributeName, $value);
+        }
+        $xml->closeTag();
+
+        return $xml;
+    }
+
+    private function createComponents(stdClass $components): epfXmlWriter
+    {
+        $xmlComponents = new epfXmlWriter('components');
+        foreach ($components->component as $component) {
+            $xmlComponents->addSimpleContentTag('component', $component);
+        }
+
+        $xmlComponents->closeTag();
+        return $xmlComponents;
+
+    }
+
+    private function createFiles(stdClass $files):epfXmlWriter
+    {
+        $xmlFiles = new epfXmlWriter('files');
+
+        if (isset($files->headers['file'])) {
+            $xmlFilesHeaders = new epfXmlWriter('headers');
+            foreach ($files->headers['file'] ?? '' as $file) {
+                $xmlFilesHeadersFile = $this->createTagWithAttribute('file', (object) $file);
+                $xmlFilesHeaders->addXml($xmlFilesHeadersFile);
+            }
+            $xmlFilesHeaders->closeTag();
+
+            $xmlFiles->addXml($xmlFilesHeaders);
+        }
+
+
+        $xmlFilesImplementations = new epfXmlWriter('implementations');
+
+        if ($files->implementations['file']) {
+            $xmlFilesImplementations = new epfXmlWriter('implementations');
+
+            foreach ($files->implementations['file'] as $file) {
+                $xmlFilesHeadersFile = $this->createTagWithAttribute('file', (object) $file);
+                $xmlFilesImplementations->addXml($xmlFilesHeadersFile);
+            }
+
+            $xmlFilesImplementations->closeTag();
+
+            $xmlFiles->addXml($xmlFilesImplementations);
+
+        }
+
+        $xmlFiles->closeTag();
+
+        return $xmlFiles;
+    }
+
 }

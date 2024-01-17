@@ -41,17 +41,14 @@ abstract class AbstractDataExtractor
 
             $existAlreadyAttributes = $this->data->$extractorName->attributes;
             if ($existAlreadyAttributes) {
-                $this->data->$extractorName->attributes = [
-                    $existAlreadyAttributes,
-                    $attributes
-                ];
+                $this->data->$extractorName->attributes[] = $attributes;
 
                 continue;
             }
 
             $node = new stdClass();
             $node->$extractorName = new stdClass();
-            $node->$extractorName->attributes = $attributes;
+            $node->$extractorName->attributes = [$attributes];
             $this->data = $node;
         }
     }

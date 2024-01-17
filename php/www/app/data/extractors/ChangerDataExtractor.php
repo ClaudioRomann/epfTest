@@ -15,19 +15,23 @@ class ChangerDataExtractor extends AbstractDataExtractor
         $extractorName = $this->extractorName();
         $arrayChange   = [];
 
-        foreach($this->data->$extractorName->attributes as $attribute) {
-            $change             = new stdClass();
-            $epfStringChange    = new epfString($attribute);
-            $epfStringChanges   = $epfStringChange->split('-');
-            $epfStringComponent = new epfString($epfStringChanges[0]->__toString());
-            $componentsArray    = $epfStringComponent->split(',');
-            $change->components = $this->extractComponents($componentsArray);
-            $filesArray         = $epfStringChanges[1]->split(',');
-            $change->files      = $this->extractFiles($filesArray);
+        foreach($this->data->$extractorName->attributes as  $attribute) {
+                //foreach ($arrayAttribute as $attribute) {
+                    $change             = new stdClass();
+                    $epfStringChange    = new epfString($attribute);
+                    $epfStringChanges   = $epfStringChange->split('-');
+                    $epfStringComponent = new epfString($epfStringChanges[0]->__toString());
+                    $componentsArray    = $epfStringComponent->split(',');
+                    $change->components = $this->extractComponents($componentsArray);
+                    $filesArray         = $epfStringChanges[1]->split(',');
+                    $change->files      = $this->extractFiles($filesArray);
 
-            $arrayChange[] = $change;
-        }
+                    $arrayChange[]      = $change;
 
+                //}
+
+
+            }
         $this->data->changes = $arrayChange;
     }
 
@@ -72,7 +76,7 @@ class ChangerDataExtractor extends AbstractDataExtractor
             if (in_array($extension, $headersExtension, true)) {
                 $files->headers['file'][] = [
                     'name' => $fileNameWithExtension,
-                    'hangedLines' => $changedLines
+                    'changedLines' => $changedLines
                 ];
             }
 

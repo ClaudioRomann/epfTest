@@ -8,3 +8,5 @@ services:
       - 8089:80
     volumes:
       - ./php/www:/var/www/html/
+    extra_hosts:
+      - host.docker.internal:host-gateway
