@@ -2,6 +2,7 @@
 
 namespace app\data\extractors;
 use epf\epfString;
+use stdClass;
 
 class DescriptionDataExtractor extends AbstractDataExtractor
 {
@@ -40,7 +41,9 @@ class DescriptionDataExtractor extends AbstractDataExtractor
             }
         }
 
-        $this->data[self::DESCRIPTION_TYPE][] = $epfStringDescription->__toString();
+        $description = new stdClass();
+        $description->description = $epfStringDescription->__toString();
+        $this->data = $description;
     }
 
     public function extractorName(): string
@@ -48,8 +51,8 @@ class DescriptionDataExtractor extends AbstractDataExtractor
         return $this->extractorName;
     }
 
-    public function extractData(): array
+    public function extractData(): stdClass
     {
-        return $this->data[$this->extractorName];
+        return $this->data;
     }
 }

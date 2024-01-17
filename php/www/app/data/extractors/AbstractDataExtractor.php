@@ -3,6 +3,7 @@
 namespace app\data\extractors;
 
 use epf\epfString;
+use stdClass;
 
 abstract class AbstractDataExtractor
 {
@@ -17,7 +18,7 @@ abstract class AbstractDataExtractor
         $this->inputTxt = $inputTxt;
     }
 
-    abstract public function extractData(): array;
+    abstract public function extractData();
     abstract public function extractorName(): string;
 
     protected function createAttributesComponents(): void {
@@ -29,13 +30,30 @@ abstract class AbstractDataExtractor
         $array = $epfStringInputTxt->split("\n");
         foreach ($array as $element) {
             $epfStringElement = new epfString($element);
-            $arrayElement = $epfStringElement->split('|');
 
-            if (static::NODE_TYPES[$arrayElement[0]->__toString()]) {
-                $this->data[$this->extractorName()][] = $arrayElement[1]->__toString();
+            if (!$epfStringElement->contains(static::TYPE)) {
+                continue;
             }
-        }
 
+            $arrayElement  = $epfStringElement->split('|');
+            $attributes    = $arrayElement[1]->__toString();
+            $extractorName = $this->extractorName();
+
+            $existAlreadyAttributes = $this->data->$extractorName->attributes;
+            if ($existAlreadyAttributes) {
+                $this->data->$extractorName->attributes = [
+                    $existAlreadyAttributes,
+                    $attributes
+                ];
+
+                continue;
+            }
+
+            $node = new stdClass();
+            $node->$extractorName = new stdClass();
+            $node->$extractorName->attributes = $attributes;
+            $this->data = $node;
+        }
     }
 
     public function init(): void
