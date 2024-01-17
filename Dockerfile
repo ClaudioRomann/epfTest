@@ -31,10 +31,7 @@ RUN pecl install xdebug-2.9.8 \
  && docker-php-ext-enable xdebug
 
 # Configure Xdebug
-
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-# && echo "xdebug.mode=develop,debug, " >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#&& echo "xdebug.remote_autostart=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
  && echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
  && echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
  && echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
