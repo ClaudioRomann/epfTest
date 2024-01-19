@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da80e348-eb21-47e3-ad47-7123564e607d" name="Changes" comment="Data structure test was added" />
+    <list default="true" id="da80e348-eb21-47e3-ad47-7123564e607d" name="Changes" comment="Data structure test was added">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +89,7 @@
     "com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary": "PHPUnit",
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpCreateRemoteSdkForm": "Docker Compose",
     "credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm": "Docker Compose",
-    "git-widget-placeholder": "Rebasing main",
+    "git-widget-placeholder": "learningEpf/replace__function__for__interface",
     "last_opened_file_path": "/Users/CRoman/Dev-Stuff/epf_test/php",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -158,8 +160,8 @@
       <item itemvalue="PHP Script.converter.php" />
       <item itemvalue="PHP Script.index.php" />
       <item itemvalue="PHP Web Page.Unnamed" />
-      <item itemvalue="PHPUnit.ConverterTest.testConvertInputTxtToOutputXml" />
       <item itemvalue="PHPUnit.ConverterTest" />
+      <item itemvalue="PHPUnit.ConverterTest.testConvertInputTxtToOutputXml" />
     </list>
     <recent_temporary>
       <list>
