@@ -7,9 +7,6 @@ use stdClass;
 
 abstract class AbstractDataExtractorInterface extends AbstractDataExtractor
 {
-    protected $inputTxt;
-    protected $data;
-
     /**
      * @param $inputTxt string plain text
      */
