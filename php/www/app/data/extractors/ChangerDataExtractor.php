@@ -5,7 +5,7 @@ namespace app\data\extractors;
 use epf\epfString;
 use stdClass;
 
-class ChangerDataExtractor extends AbstractDataExtractor
+class ChangerDataExtractor extends AbstractDataExtractorInterface
 {
     protected const TYPE = 'Change';
     private $extractorName = 'changes';

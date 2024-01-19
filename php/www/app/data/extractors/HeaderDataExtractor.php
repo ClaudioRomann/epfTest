@@ -6,7 +6,7 @@ use app\adapter\epfStringParser;
 use epf\epfDateTime;
 use epf\epfString;
 
-class HeaderDataExtractor extends AbstractDataExtractor
+class HeaderDataExtractor extends AbstractDataExtractorInterface
 {
     protected const TYPE = 'Header';
 
