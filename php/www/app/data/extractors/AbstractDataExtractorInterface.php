@@ -18,7 +18,5 @@ abstract class AbstractDataExtractorInterface extends AbstractDataExtractor
         $this->inputTxt = $inputTxt;
     }
 
-    abstract public function extractData();
-    abstract public function extractorName(): string;
     abstract protected function createAttributesComponents(): void;
 }
