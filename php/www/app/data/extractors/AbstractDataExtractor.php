@@ -21,9 +21,6 @@ abstract class AbstractDataExtractor
     abstract public function extractData();
     abstract public function extractorName(): string;
 
-    protected function createAttributesComponents(): void {
-        // TODO: nothing
-    }
     protected function createNodeComponents(): void
     {
         $epfStringInputTxt = new epfString($this->inputTxt);
