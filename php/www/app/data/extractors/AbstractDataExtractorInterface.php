@@ -17,6 +17,6 @@ abstract class AbstractDataExtractorInterface extends AbstractDataExtractor
     {
         $this->inputTxt = $inputTxt;
     }
-
+  
     abstract protected function createAttributesComponents(): void;
 }
