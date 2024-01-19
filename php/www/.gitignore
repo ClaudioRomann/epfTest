@@ -1,6 +1,5 @@
 vendor
 .phpunit.result.cache
 .DS_Store
-/.idea
 files/output/*
 files/performance/*
